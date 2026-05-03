@@ -1,0 +1,140 @@
+---
+title: Desktop application plan
+sidebarTitle: Desktop app plan
+description: Define how to build a Macintosh desktop application that ingests, cleans, styles, and delivers content from multiple sources.
+---
+
+## What you are building
+
+You are building a desktop application for macOS.
+
+The app should let you collect information from multiple sources.
+
+The app should clean and normalize that information.
+
+The app should apply your design and art specifications.
+
+The app should deliver final outputs through your preferred delivery channels.
+
+## Core workflow
+
+1. **Ingest** content from each source.
+2. **Transform** raw content into a shared internal format.
+3. **Clean** data with validation, deduplication, and formatting rules.
+4. **Style** the output with templates and design assets.
+5. **Deliver** packaged content to selected destinations.
+
+## Recommended system architecture
+
+### 1) Source connectors
+
+Create one connector per source type.
+
+Use native integrations for macOS tools when possible.
+
+Use plugin-based connectors for third-party apps.
+
+### 2) Processing pipeline
+
+Use a pipeline with clear stages:
+
+- Parse
+- Validate
+- Enrich
+- Normalize
+- Export
+
+Each stage should produce logs and structured errors.
+
+### 3) Design system layer
+
+Store design tokens for typography, color, spacing, and art direction.
+
+Apply templates to keep output consistent.
+
+Version templates so you can reproduce past deliveries.
+
+### 4) Delivery layer
+
+Support multiple output targets:
+
+- Files (`.pdf`, `.docx`, `.html`, `.json`)
+- Email handoff
+- Cloud folders
+- API push to external systems
+
+Add delivery profiles so you can reuse specifications by audience.
+
+## macOS-first implementation strategy
+
+Start with capabilities available on a Macintosh computer:
+
+- Local database for cached source content
+- Filesystem watch for drop folders
+- Native keychain for credential storage
+- Background tasks for scheduled imports
+
+Then add plugin integrations for external applications.
+
+## Plugin model
+
+Define a plugin contract for three plugin types:
+
+- **Source plugins** for ingestion
+- **Transform plugins** for custom cleanup logic
+- **Delivery plugins** for target-specific publishing
+
+Each plugin should declare:
+
+- Name and version
+- Input and output schema
+- Required permissions
+- Retry and error behavior
+
+## Quality standards
+
+Before delivery, run automated checks:
+
+- Schema validation
+- Duplicate detection
+- Required-field validation
+- Style conformance checks
+- Export integrity checks
+
+Show failures in a review screen before publish.
+
+## Security and compliance
+
+Encrypt cached sensitive content at rest.
+
+Use least-privilege permissions for all integrations.
+
+Track audit logs for ingestion, edits, and delivery events.
+
+## Phased build plan
+
+### Phase 1: Foundation
+
+Build ingestion, normalization, and one delivery target.
+
+### Phase 2: Design automation
+
+Add templates, design tokens, and preview rendering.
+
+### Phase 3: Plugin expansion
+
+Add plugin SDK and external application connectors.
+
+### Phase 4: Operations
+
+Add scheduling, monitoring dashboards, and audit reporting.
+
+## Next decisions to finalize
+
+Define your first three source systems.
+
+Define your first delivery channel.
+
+Define your non-negotiable brand and art rules.
+
+Define whether v1 is single-user or team-enabled.
